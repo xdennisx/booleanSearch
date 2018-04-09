@@ -74,6 +74,7 @@ if __name__ == '__main__':
     
     t0 = time.time()
     source = load_data(args.source)
+    print(time.time() - t0)
     source_len = len(source)
     trie = Trie()
     r='[’!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~「」【】／、？：〈〉…（）《》！％－〝〞，＠1-9]+'

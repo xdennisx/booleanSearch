@@ -38,47 +38,32 @@ if __name__ == '__main__':
     for x in lines:
         op = re.split(' |\n',x)
         query_times = len(op) / 2
+        list1 = search(op[0])
+        list2 = search(op[2])
         if op[1] == "and":
-            if query_times == 2:
-                list1 = search(op[0])
-                list2 = search(op[2])
-                ans = list(set(list1) & set(list2))
-            elif query_times == 3:
-                list1 = search(op[0])
-                list2 = search(op[2])
+            ans = list(set(list1) & set(list2))
+            if query_times == 3:
                 list3 = search(op[4])
-                ans = list(set(list1) & set(list2) & set(list3))
+                ans = list(set(ans) & set(list3))
         elif op[1] == "or":
-            if query_times == 2:
-                list1 = search(op[0])
-                list2 = search(op[2])
-                ans = list(set(list1) | set(list2))
-            elif query_times == 3:
-                list1 = search(op[0])
-                list2 = search(op[2])
+            ans = list(set(list1) | set(list2))
+            if query_times == 3:
                 list3 = search(op[4])
-                ans = list(set(list1) | set(list2) | set(list3))
+                ans = list(set(ans) | set(list3))
         elif op[1] == "not":
-            if query_times == 2:
-                list1 = search(op[0])
-                list2 = search(op[2])
-                ans = list(set(list1) - set(list2))
-            elif query_times == 3:
-                list1 = search(op[0])
-                list2 = search(op[2])
+            ans = list(set(list1) - set(list2))
+            if query_times == 3:
                 list3 = search(op[4])
-                ans = list(set(list1) - set(list2) - set(list3))
-        outputs = []
+                ans = list(set(ans) - set(list3))
+        
         if len(ans) == 0:
-            if count == count_lines:
-                file.write('0')
-            else:
-                file.write('0' + '\n')
+            file.write('0')
+            if count != count_lines:
+                file.write('\n')
         else:
-            if count == count_lines:
-                file.write(','.join(str(v) for v in sorted(ans, key=int)))
-            else:
-                file.write(','.join(str(v) for v in sorted(ans, key=int)) + "\n")
+            file.write(','.join(str(v) for v in sorted(ans, key=int)))
+            if count != count_lines:
+                file.write("\n")
         count += 1
     query.close()
     file.close()
