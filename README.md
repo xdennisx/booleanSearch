@@ -7,7 +7,7 @@
 ## jieba & inverted index (inverted.py)
 First use `jieba.lcut` to cut words in each line, if the result length of word is shorter 
 than **3**, I'll concate the character besides it until the length is longer than **3**
-```python=91
+```python=
   words2 = jieba.lcut(line, cut_all=True)
         for index, word in enumerate(words2):
             l = len(word)
@@ -60,7 +60,7 @@ than **3**, I'll concate the character besides it until the length is longer tha
 `trie.insert` is to build a `trie-tree` and `trie.search` is to find the word in tree
 ## Brute-force (main.py)
 Read every line in **query.txt**, if find query in line then append to the list.
-```python=38
+```python=
 for x in lines:
         op = re.split(' |\n',x)
         query_times = len(op) / 2
@@ -96,4 +96,4 @@ for x in lines:
 | method | time |
 | ------ | ----------- |
 | jieba & inverted index | Brute-force |
-| 29 | 0.29 |
+| 29 | 0.27 |
