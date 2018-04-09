@@ -40,21 +40,19 @@ if __name__ == '__main__':
         query_times = len(op) / 2
         list1 = search(op[0])
         list2 = search(op[2])
+        ans = []
         if op[1] == "and":
             ans = list(set(list1) & set(list2))
-            if query_times == 3:
-                list3 = search(op[4])
-                ans = list(set(ans) & set(list3))
+            for i in range(2,int(query_times)):
+                ans = list(set(ans) & set(search(op[i*2])))
         elif op[1] == "or":
             ans = list(set(list1) | set(list2))
-            if query_times == 3:
-                list3 = search(op[4])
-                ans = list(set(ans) | set(list3))
+            for i in range(2,int(query_times)):
+                ans = list(set(ans) | set(search(op[i*2])))
         elif op[1] == "not":
             ans = list(set(list1) - set(list2))
-            if query_times == 3:
-                list3 = search(op[4])
-                ans = list(set(ans) - set(list3))
+            for i in range(2,int(query_times)):
+                ans = list(set(ans) - set(search(op[i*2])))
         
         if len(ans) == 0:
             file.write('0')
