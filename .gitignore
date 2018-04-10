@@ -1,4 +1,5 @@
-*.txt
+output*.txt
+query.txt
 *.csv
 test.py
 trie.py
